@@ -1,27 +1,4 @@
-// Since the project information indicated that we may be using the shapes code
-// as a reference, I copied and then commented out the files to use until
-// I have finished my own programming.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-State
+/* State */
 // Here, we define variables for the data that our program needs to remember.
 // We call this data "state" because it represents the state of our program.
 
@@ -47,9 +24,10 @@ const addShapeIntervalId = setInterval(addShape, 1000);
 
 render(); // We call this function once to render the initial state
 
-/* Update the DOM to reflect the current state.
+/**
+ * Update the DOM to reflect the current state.
  * The term "render" is often used to describe this process.
- */  /*
+ */
 function render() {
   // Render the squares
   const squares = document.querySelector("#squares");
@@ -84,7 +62,7 @@ function render() {
 
 /**
  * Add a random shape to the `shapes` array
- */ /*
+ */
 function addShape() {
 
   const color = colors[Math.floor(Math.random() * colors.length)];
@@ -103,4 +81,4 @@ function addShape() {
   }
 
   // TODO: Stop adding shapes if we've reached the maximum number of shapes
-} */
+}
