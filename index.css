@@ -1,0 +1,13 @@
+body {
+  width: 400px;
+  border: 10px solid rgb(38, 0, 128);
+  padding: 30px;
+  margin: 30px;
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif
+}
+
+td {
+  border: solid 1px black;
+  margin: 1rem;
+}
