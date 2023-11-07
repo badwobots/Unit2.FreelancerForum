@@ -1,106 +1,84 @@
-// Since the project information indicated that we may be using the shapes code
-// as a reference, I copied and then commented out the files to use until
-// I have finished my own programming.
+// Freelancer name array for randomly generated freelancers
+const names = ["John 117", "Linda 058", "Fred 104", "Kelly 087",];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-State
-// Here, we define variables for the data that our program needs to remember.
-// We call this data "state" because it represents the state of our program.
-
-// TODO: Add support for more colors
-const colors = ["red", "green", "blue", "orange", "yellow", "purple"];
-const sizes = ["small", "medium", "large"];
-const maxShapes = 10;
-const shapes = [
-  {
-    color: "red",
-    size: "small",
-  },
-  {
-    color: "yellow",
-    size: "small",
-  },
+//Freelancer occupation array for randomly generated freelancers
+const occupations = [
+  "programmer",
+  "spartan",
+  "engineer",
+  "fullstack dev",
+  "shortstack dev",
+  "halfstack dev",
 ];
 
-// `setInterval` will call `addShape` every 1000 milliseconds (1 second)
-// and return an interval ID that we can use to stop the interval later.
-// Calling `clearInterval(addShapeIntervalId)` will stop the interval.
-const addShapeIntervalId = setInterval(addShape, 1000);
+//Sample freelancer array with name, price, occupation
+const freelancers = [
+  { name: "Dr. Slice", price: 25, occupation: "gardener" },
+  { name: "Dr. Pressure", price: 51, occupation: "programmer" },
+  { name: "Prof. Possibility", price: 43, occupation: "teacher" },
+  { name: "Prof. Prism", price: 81, occupation: "teacher" },
+  { name: "Dr. Impulse", price: 43, occupation: "teacher" },
+  { name: "Prof. Spark", price: 76, occupation: "programmer" },
+  { name: "Dr. Wire", price: 47, occupation: "teacher" },
+  { name: "Prof. Goose", price: 72, occupation: "driver" },
 
-render(); // We call this function once to render the initial state
+];
 
-/* Update the DOM to reflect the current state.
- * The term "render" is often used to describe this process.
- */  /*
+//Reference constants to HTML elements
+const average = document.getElementById("average");
+const tableBody = document.querySelector("#table-freelancer");
+
+//Interval to control randomly added freelancers into list
+const addFreelancerIntervalId = setInterval (addRandomFreelancer, 3000);
+
+//Render
+render();
+
+//Function to generate table elements and create new rows under column headings
 function render() {
-  // Render the squares
-  const squares = document.querySelector("#squares");
-  const squareElements = shapes.map((shape) => {
-    const element = document.createElement("li");
-    element.classList.add(shape.color, shape.size);
-    return element;
+  const newRows = freelancers.map((freelancer) => {
+    const newRow = document.createElement("tr");
+
+    const name = document.createElement("td");
+    name.innerText = freelancer.name;
+
+    const occupation = document.createElement("td");
+    occupation.innerText = freelancer.occupation;
+    
+    const price = document.createElement("td");
+    price.innerText = `$${freelancer.price}`;
+
+    newRow.append(name, occupation, price);
+    return newRow;
   });
-  squares.replaceChildren(...squareElements);
 
-  const circles = document.querySelector("#circles");
-     const circleElements = shapes.map((shape) => {
-       const element = document.createElement("li");
-       element.classList.add("circle", shape.color, shape.size);
-       return element;
-     });
-     circles.replaceChildren(...circleElements);
+  tableBody.replaceChildren(...newRows);
 
-  // TODO: Render the circles
+  //Constant to update average starting price of freelancers in table to 2 decimals
+  const newAverage = Math.floor(calculateAveragePrice());
+  average.innerText = parseFloat(newAverage).toFixed(2);
 }
 
-/*function render() {
-  // ...
-  const circles = document.querySelector("#circles");
-  const circleElements = shapes.map((shape) => {
-    const element = document.createElement("li");
-    element.classList.add("circle", shape.color, shape.size);
-    return element;
-  });
-  circles.replaceChildren(...circleElements);
-}*/
+//Function to add random generated freelancers using name and occupation arrays
+function addRandomFreelancer() {
+  const name = names[Math.floor(Math.random() * names.length)];
+  const occupation = occupations[Math.floor(Math.random() * occupations.length)];
+  const price = Math.floor(Math.random() * 575);
 
-/**
- * Add a random shape to the `shapes` array
- */ /*
-function addShape() {
-
-  const color = colors[Math.floor(Math.random() * colors.length)];
-  // ...
-  const size = sizes[Math.floor(Math.random() * sizes.length)];
-  shapes.push({ color, size });
-
-  // TODO: Randomize the size of the shape
-
-  shapes.push({ color, size: "small" });
+  freelancers.push({name, occupation, price});
 
   render();
 
-  if (shapes.length >= maxShapes) {
-    clearInterval(addShapeIntervalId);
+//Limit number of randomly generated freelancers to 20
+  if (freelancers.length === 20) {
+    clearInterval(addFreelancerIntervalId);
   }
+}
 
-  // TODO: Stop adding shapes if we've reached the maximum number of shapes
-} */
+//Function to calculate the average starting price
+function calculateAveragePrice() {
+
+  const total = freelancers.reduce((accum, current) => accum + current.price, 0);
+  return total / freelancers.length;
+}
+
